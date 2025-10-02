@@ -4,7 +4,7 @@ import {
 	generateRandomPhoneNumber,
 	generateTestObjects,
 } from "../helper/generator";
-import { ApiWorld } from "../types/cucumber";
+import type { ApiWorld } from "../types/cucumber";
 import type { Payload } from "./payload.types";
 
 const positiveRegisterPhone = {

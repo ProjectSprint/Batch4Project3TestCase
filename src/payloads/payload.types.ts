@@ -1,4 +1,6 @@
-export type Resolvable<T> = T | (() => T);
+import type { ApiWorld } from "../types/cucumber";
+
+export type Resolvable<T> = T | ((world: ApiWorld) => T);
 
 export type PositivePayload = {
 	[key: string]: Resolvable<

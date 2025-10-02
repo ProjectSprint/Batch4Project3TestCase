@@ -26,7 +26,7 @@ When("I use {word} payload", function (this: ApiWorld, payloadName: string) {
 	const payload = payloads[payloadName];
 	if (!payload) throw new Error(`Payload '${payloadName}' not found`);
 
-	const resolved = resolvePayload(payload.positive);
+	const resolved = resolvePayload(payload.positive, this);
 
 	this.request.options.headers["Content-Type"] = "application/json";
 	this.request.options.body = JSON.stringify(resolved);

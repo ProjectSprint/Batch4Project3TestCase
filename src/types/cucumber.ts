@@ -23,7 +23,10 @@ export class ApiWorld extends World {
 	request: DraftRequest;
 	invalidPayloads?: unknown[];
 	violationResponses: ViolationResult[];
-	savedPayload: Record<string, unknown>; // <— NEW
+	savedPayload: Record<
+		string,
+		string | number | boolean | null | object | undefined
+	>;
 
 	constructor(options: IWorldOptions) {
 		super(options);
