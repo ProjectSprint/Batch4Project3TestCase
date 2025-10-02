@@ -10,7 +10,9 @@ export function generateRandomImageUrl(): string {
 	return `http://${generateRandomDomain()}/image.jpg`;
 }
 
-export function generateRandomPhoneNumber(addPlusPrefix: boolean): string {
+export function generateRandomPhoneNumber(args: {
+	addPlusPrefix: boolean;
+}): string {
 	const callingCodes: readonly string[] = [
 		"1",
 		"44",
@@ -221,7 +223,7 @@ export function generateRandomPhoneNumber(addPlusPrefix: boolean): string {
 		.toString()
 		.padStart(8, "0");
 
-	return addPlusPrefix
+	return args.addPlusPrefix
 		? `+${callingCode}${phoneNumber}`
 		: `${callingCode}${phoneNumber}`;
 }

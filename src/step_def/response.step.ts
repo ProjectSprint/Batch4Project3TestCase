@@ -2,8 +2,7 @@ import assert from "node:assert";
 import { Then } from "@cucumber/cucumber";
 import get from "lodash.get";
 import z from "zod";
-import { isSchemaKey } from "../support/helper/typeguard";
-import { schemaRegistry } from "../support/payloads/schemaRegistry";
+import { isSchemaAvailable, schemaRegistry } from "../schemas";
 import type { ApiWorld } from "../types/cucumber";
 
 Then(
@@ -13,7 +12,7 @@ Then(
 			throw new Error("No response found in World");
 		}
 
-		if (!isSchemaKey(schemaName)) {
+		if (!isSchemaAvailable(schemaName)) {
 			throw new Error(`Schema ${schemaName} not found in World`);
 		}
 
@@ -43,6 +42,23 @@ Then(
 			throw new Error("No response found in World");
 		}
 		assert.strictEqual(this.lastResponse.status, status);
+	},
+);
+
+Then(
+	"the violation responses should be {int}",
+	function (this: ApiWorld, expectedStatus: number) {
+		if (!this.violationResponses || this.violationResponses.length === 0) {
+			throw new Error("No violation responses found in World");
+		}
+
+		for (const { status } of this.violationResponses) {
+			assert.strictEqual(
+				status,
+				expectedStatus,
+				`Expected status ${expectedStatus}, but got ${status}`,
+			);
+		}
 	},
 );
 

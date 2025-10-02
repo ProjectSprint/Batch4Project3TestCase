@@ -9,6 +9,10 @@ type DraftRequest = {
 		body?: string;
 	};
 };
+type ViolationResult = {
+	status: number;
+	body?: Record<string, unknown>;
+};
 
 export class ApiWorld extends World {
 	baseUrl: string;
@@ -18,17 +22,23 @@ export class ApiWorld extends World {
 
 	request: DraftRequest;
 	invalidPayloads?: unknown[];
+	violationResponses: ViolationResult[];
+	savedPayload: Record<string, unknown>; // <— NEW
 
 	constructor(options: IWorldOptions) {
 		super(options);
 		this.baseUrl = process.env["API_URL"] || "https://example.com";
 		this.tokens = {};
-		this.request = { options: { headers: {} } }; // safe defaults
+		this.request = { options: { headers: {} } };
+		this.violationResponses = [];
+		this.savedPayload = {}; // init empty
 	}
 
 	resetRequest() {
 		this.request = { options: { headers: {} } };
 		this.invalidPayloads = [];
+		this.violationResponses = [];
+		this.savedPayload = {};
 	}
 }
 

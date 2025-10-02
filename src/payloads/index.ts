@@ -1,14 +1,42 @@
+import {
+	generateRandomEmail,
+	generateRandomPassword,
+	generateRandomPhoneNumber,
+	generateTestObjects,
+} from "../helper/generator";
+import { ApiWorld } from "../types/cucumber";
 import type { Payload } from "./payload.types";
 
-export const payloads: Record<string, Payload> = {
-	register: {
-		positive: {},
-		negative: [],
-	},
-	login: {
-		positive: {},
-		negative: [],
-	},
+const positiveRegisterPhone = {
+	phone: generateRandomPhoneNumber({ addPlusPrefix: true }),
+	password: generateRandomPassword(),
+};
+const positiveRegisterEmail = {
+	email: generateRandomEmail(),
+	password: generateRandomPassword(),
 };
 
-// todo: try to create positive and negative payload
+export const payloads: Record<string, Payload> = {
+	registerPhone: {
+		positive: positiveRegisterPhone,
+		negative: generateTestObjects({}, positiveRegisterPhone),
+	},
+	registerEmail: {
+		positive: positiveRegisterEmail,
+		negative: generateTestObjects({}, positiveRegisterEmail),
+	},
+	loginPhone: {
+		positive: {
+			email: (world: ApiWorld) => world.savedPayload["emailFromRegister"],
+			password: (world: ApiWorld) => world.savedPayload["passwordFromRegister"],
+		},
+		negative: generateTestObjects({}, positiveRegisterPhone),
+	},
+	loginEmail: {
+		positive: {
+			phone: (world: ApiWorld) => world.savedPayload["phoneFromRegister"],
+			password: (world: ApiWorld) => world.savedPayload["passwordFromRegister"],
+		},
+		negative: generateTestObjects({}, positiveRegisterEmail),
+	},
+};

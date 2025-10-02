@@ -1,5 +1,9 @@
+export type Resolvable<T> = T | (() => T);
+
 export type PositivePayload = {
-	[key: string]: PositivePayload | string | number | boolean | undefined;
+	[key: string]: Resolvable<
+		PositivePayload | string | number | boolean | undefined
+	>;
 };
 
 export type Payload = {

@@ -7,7 +7,8 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "init:ts": "tsc --init"
+    "init:ts": "tsc --init",
+    "test": "cucumber-js --require-module ts-node/register --require src/**/*.ts --publish-quiet"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
