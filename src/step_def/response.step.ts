@@ -1,9 +1,17 @@
 import assert from "node:assert";
-import { Then } from "@cucumber/cucumber";
+import { Given, Then } from "@cucumber/cucumber";
 import get from "lodash.get";
 import z from "zod";
 import { isSchemaAvailable, schemaRegistry } from "../schemas";
 import type { ApiWorld } from "../types/cucumber";
+
+Given("{word} exists", function (this: ApiWorld, name: string) {
+	const inSavedPayload = this.savedPayload[name];
+
+	if (inSavedPayload === undefined) {
+		throw new Error(`Expected '${name}' to exist in tokens or savedPayload`);
+	}
+});
 
 Then(
 	"the response body matches the {word} schema",

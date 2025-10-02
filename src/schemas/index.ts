@@ -1,4 +1,5 @@
 import type z from "zod";
+import { AuthSchema } from "./auth.schema";
 import { UserSchema } from "./user.schema";
 
 // biome-ignore lint/suspicious/noExplicitAny: we can't determine what ObjectSchema output will be
@@ -7,6 +8,7 @@ type SchemaRegistry = Record<string, ObjectSchema>;
 
 export const schemaRegistry: SchemaRegistry = {
 	user: UserSchema,
+	auth: AuthSchema,
 };
 
 export function isSchemaAvailable(

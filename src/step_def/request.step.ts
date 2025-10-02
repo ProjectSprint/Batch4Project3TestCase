@@ -15,11 +15,16 @@ When(
 );
 
 // Add token
-When("I use {word} token", function (this: ApiWorld, tokenName: string) {
-	const token = this.tokens[tokenName];
-	if (!token) throw new Error(`Token '${tokenName}' not found`);
-	this.request.options.headers["Authorization"] = `Bearer ${token}`;
-});
+When(
+	"I set a bearer authentication header with {string} value",
+	function (this: ApiWorld, str: string) {
+		const token = this.savedPayload[str];
+		if (!token) throw new Error(`'${str}' not found`);
+		if (typeof token !== "string")
+			throw new Error(`'${str}' is not string, not suitable for header`);
+		this.request.options.headers["Authentication"] = `Bearer ${token}`;
+	},
+);
 
 // Add payload
 When("I use {word} payload", function (this: ApiWorld, payloadName: string) {

@@ -18,7 +18,6 @@ export class ApiWorld extends World {
 	baseUrl: string;
 	lastResponse?: Response;
 	jsonBody?: Record<string, unknown>;
-	tokens: Record<string, string>;
 
 	request: DraftRequest;
 	invalidPayloads?: unknown[];
@@ -31,7 +30,6 @@ export class ApiWorld extends World {
 	constructor(options: IWorldOptions) {
 		super(options);
 		this.baseUrl = process.env["API_URL"] || "https://example.com";
-		this.tokens = {};
 		this.request = { options: { headers: {} } };
 		this.violationResponses = [];
 		this.savedPayload = {}; // init empty
