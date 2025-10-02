@@ -4,7 +4,7 @@ export type Resolvable<T> = T | ((world: ApiWorld) => T);
 
 export type PositivePayload = {
 	[key: string]: Resolvable<
-		PositivePayload | string | number | boolean | undefined
+		PositivePayload | string | number | boolean | undefined | null | object
 	>;
 };
 
