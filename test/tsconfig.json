@@ -1,0 +1,22 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    // File Layout
+    "rootDir": ".",
+    "outDir": "../test/dist",
+    // Environment Settings
+    // See also https://aka.ms/tsconfig/module
+    "module": "nodenext", // since cucumber is cjs
+    "moduleResolution": "nodenext", // since cucumber is cjs
+    "target": "esnext", // since cucumber is cjs
+    // For nodejs:
+    "lib": [
+      "esnext"
+    ],
+    "types": [
+      "node"
+    ],
+    "verbatimModuleSyntax": false // since cucumber is cjs
+  }
+}
