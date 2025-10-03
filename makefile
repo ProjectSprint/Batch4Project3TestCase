@@ -1,10 +1,5 @@
-gen-ai-context:
-	find . \
-		! -path "./node_modules/*" \
-		! -name "package*" \
-		! -name "makefile" \
-		! -name ".*" \
-		! -path "./.git/*" \
+gen-test-ai-context:
+	find test \
 		! -name "*.jpg" \
 		-type f \
 		-exec sh -c 'echo "=== File: $$1 ==="; cat "$$1"' sh {} \; \
