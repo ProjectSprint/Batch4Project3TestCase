@@ -78,6 +78,14 @@ Then(
 
 		const actual = get(this.jsonBody, path);
 
+		if (Array.isArray(actual)) {
+			assert.deepStrictEqual(
+				actual.map((d) => d.toString()),
+				Array(actual.length).fill(expected),
+				`Expected all values at path '${path}' to equal '${expected}', but got ${JSON.stringify(actual)}`,
+			);
+			return;
+		}
 		assert.strictEqual(
 			actual,
 			expected,
