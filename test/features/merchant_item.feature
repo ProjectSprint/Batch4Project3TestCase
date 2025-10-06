@@ -1,5 +1,15 @@
 Feature: Manage Merchant Items
 
+  Scenario: Add Merchant geolocation
+    Given tokenFromRegister exists
+    When I prepare a POST request to "/admin/merchants/addedMerchantId/items" 
+    When I set a bearer authentication header with tokenFromRegister value
+    And I use postItemSchema payload
+    And send
+    Then the response should be 201
+    And the response body matches the merchantId schema
+    And save the "body.merchantId" value as addedMerchantLocation
+
   Scenario: Get Merchant Items
     Given tokenFromRegister exists
     When I prepare a GET request to "/admin/merchants/id123abc/items"

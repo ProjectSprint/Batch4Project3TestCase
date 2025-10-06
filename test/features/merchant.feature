@@ -1,5 +1,15 @@
 Feature: Manage Merchant
 
+  Scenario: Add Merchant geolocation
+    Given tokenFromRegister exists
+    When I prepare a POST request to "/admin/merchants" 
+    When I set a bearer authentication header with tokenFromRegister value
+    And I use postMerchantSchema payload
+    And send
+    Then the response should be 201
+    And the response body matches the merchantId schema
+    And save the "body.merchantId" value as addedMerchantId
+
   Scenario: Get Merchants with default Parameter
     Given tokenFromRegister exists
     When I prepare a GET request to "/admin/merchants?limit=5&offset=0"
@@ -47,7 +57,7 @@ Feature: Manage Merchant
 
   Scenario: Get Small Restaurant Merchants 
     Given tokenFromRegister exists
-    When I prepare a GET request to "/admin/merchants?createdAt=asc&limit=5&offset=0"
+    When I prepare a GET request to "/admin/merchants?createdAt=desc&limit=5&offset=0"
     When I set a bearer authentication header with tokenFromRegister value
     And send
     Then the response should be 200
