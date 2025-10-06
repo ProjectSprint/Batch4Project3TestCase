@@ -21,3 +21,17 @@ export const ItemSchema = z.object({
 		total: z.int(),
 	}),
 });
+
+export const PostItemSchema = z.object({
+	itemId: z.string(),
+	name: z.string(),
+	productCategory: z.enum([
+		"Beverage",
+		"Food",
+		"Snack",
+		"Condiments",
+		"Additions"
+	]),
+	price: z.int().min(1),
+	imageUrl: z.url(),
+})

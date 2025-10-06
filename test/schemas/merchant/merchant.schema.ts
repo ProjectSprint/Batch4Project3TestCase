@@ -25,3 +25,21 @@ export const MerchantSchema = z.object({
 		total: z.int(),
 	}),
 });
+
+export const PostMerchantSchema = z.object({
+	merchantId: z.string(),
+	name: z.string(),
+	merchantCategory: z.enum([
+		"SmallRestaurant",
+		"MediumRestaurant", 
+		"LargeRestaurant",
+		"MerchandiseRestaurant",
+		"BoothKiosk",
+		"ConvenienceStore"
+	]),
+	imageUrl: z.url(),
+	location: z.object({
+		lat: z.float32(),
+		long: z.float32(),
+	}),
+})
